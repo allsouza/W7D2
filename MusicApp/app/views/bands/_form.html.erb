@@ -1,0 +1,14 @@
+<% method = (band.name ? "patch" : "post") %>
+<% action = (band.name ? band_url(params[:id]) : bands_url) %>
+
+
+<form action="<%=action%>" method="post">
+    <%= auth_token %>
+    <input type="hidden" name="_method" value="<%=method%>">
+
+    <label for="name">Band name: </label>
+    <input type="text" name="band[name]" id="name">
+
+    <input type="submit" value="Create Band">
+
+</form>

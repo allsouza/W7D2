@@ -1,0 +1,13 @@
+<h2><%= @band.name %></h2>
+
+<a class="button-links" href="<%=new_band_album_url(@band.id)%>">Add Album</a>
+
+<% if @band.albums %>
+<ul>
+    <% @band.albums.each do |album| %>
+        <li>
+            <a href="<%=album_url(album.id)%>"><%= album.title %>, <%= album.year %></a>
+        </li>
+    <% end %>
+</ul>
+<% end %>

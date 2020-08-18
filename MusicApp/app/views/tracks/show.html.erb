@@ -1,0 +1,56 @@
+<h2><%= @track.title %></h2>
+
+<section class="col35">
+<table>
+    <tr>
+        <td>Album:</td>
+        <td><a href="<%= album_url(@track.album_id) %>"><%= @track.album.title %></a></td>
+    </tr>
+    <tr>
+        <td>Band:</td>
+        <td><a href="<%= band_url(@track.album.band_id) %>"><%= @track.band.name %></a></td>
+    </tr>
+    <tr>
+        <td>Track number:</td>
+        <td><%= @track.ord %></td>
+    </tr>
+    <tr>
+        <td>Bonus?</td>
+        <td><%= @track.bonus ? "Yes" : "No" %></td>
+    </tr>
+</table>
+
+<section class=album-nav>
+<form action="<%=album_url(@track.album_id)%>" method="get">
+        <%= auth_token %>
+        <input type="submit" value="Back to Album">
+    </form>
+    <form action="<%=edit_track_url(@track.id)%>" method="get">
+        <%= auth_token %>
+        <input type="submit" value="Edit">
+    </form>
+    <form action="<%=track_url(@track.id)%>" method="post">
+        <input type="hidden" name="_method" value="delete">
+        <%= auth_token %>
+        <input type="submit" value="Delete">
+    </form>
+</section>
+
+<br>
+<section class="extra-track-info">
+    <div class="lyrics">
+        <p>Lyrics:</p>
+        <%= @track.lyrics.html_safe %>
+    </div>
+
+    <div class="notes">
+        <% notes = @track.notes %>
+        <%= render "notes/note", notes: notes  if notes %>
+    </div>
+</section>
+</section>
+
+<section class="col65">
+
+</section>
+<br>

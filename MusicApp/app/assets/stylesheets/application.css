@@ -1,0 +1,104 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+ 
+html {
+    font-size: larger;
+    min-height: 95%;
+    height: max-content;
+    padding: 30px;
+    background-color: lightskyblue;
+    background-image: linear-gradient(lightblue, darkblue 95%);
+}
+
+body{
+    width: 95%;
+    max-width: 1000px;
+    margin: auto;
+    
+}
+.navigation {
+    width: 90%;
+    display: inline-block;
+    text-align: right;
+}
+
+header{
+     width: 90%;
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     padding-bottom: 30px;
+ }
+
+ header > a {
+    font-size: 50px;
+    font-family: 'Bangers', cursive;
+    
+    text-shadow: 3px 3px 9px rgb(87, 87, 87);
+}
+ 
+ .button-links {
+    background: rgb(0, 0, 0);
+    border-radius: 10px;
+    padding: 5px;
+    color: rgb(255, 255, 255);
+ }
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+ table td {
+    padding-right: 20px;     
+}
+
+.album-nav {
+    display: flex;
+}
+
+.album-nav form{
+    padding-right: 10px;
+}
+
+p {
+    margin: 0;
+}
+
+h2 {
+    font-size: 30px;
+}
+
+ul {
+    font-size: larger;
+}
+
+.lyrics{
+    background: #e6e6fa4d;
+    max-height: 500px;
+    overflow: auto;
+    padding: 10px;
+    box-sizing: content-box;
+}
+
+.col35 {
+    width: 35%;
+}
+
+.col65 {
+    width: 65%;
+}
+

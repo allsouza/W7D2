@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MusicApp</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <style>@import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');</style>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+     </head>
+  <header>
+     <a href="<%=bands_url%>">Sleepster</a>
+
+    <div class="navigation">
+        <% if logged_in? %>
+          <p>Welcome, <%= current_user.name %>!       
+          <form id="logout-button" action="<%=session_url%>" method="post">
+              <%= auth_token %>
+              <input type="hidden" name="_method" value="delete">
+              <input type="submit" value="Logout">
+          </p>
+          </form>
+        <% else %>
+          <p>
+            <a class="button-links" href="<%=new_session_url%>">Login</a> or
+            <a class="button-links" href="<%=new_user_url%>">Sign Up</a> 
+          </p>
+        <% end %>  
+    </div>
+    <br>
+  </header>
+
+  <body>
+    <% if !flash.now[:errors].nil? %>
+      <p>Error!</p>
+      <ul>
+        <% flash.now[:errors].each do |error| %>
+          <li>
+            <%= error %>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+    <%= yield %>
+  </body>
+</html>
