@@ -1,56 +1,59 @@
 <h2><%= @track.title %></h2>
+<section class="split">
+    <section class="col35">
+    <table>
+        <tr>
+            <td>Album:</td>
+            <td><a href="<%= album_url(@track.album_id) %>"><%= @track.album.title %></a></td>
+        </tr>
+        <tr>
+            <td>Band:</td>
+            <td><a href="<%= band_url(@track.album.band_id) %>"><%= @track.band.name %></a></td>
+        </tr>
+        <tr>
+            <td>Track number:</td>
+            <td><%= @track.ord %></td>
+        </tr>
+        <tr>
+            <td>Bonus?</td>
+            <td><%= @track.bonus ? "Yes" : "No" %></td>
+        </tr>
+    </table>
 
-<section class="col35">
-<table>
-    <tr>
-        <td>Album:</td>
-        <td><a href="<%= album_url(@track.album_id) %>"><%= @track.album.title %></a></td>
-    </tr>
-    <tr>
-        <td>Band:</td>
-        <td><a href="<%= band_url(@track.album.band_id) %>"><%= @track.band.name %></a></td>
-    </tr>
-    <tr>
-        <td>Track number:</td>
-        <td><%= @track.ord %></td>
-    </tr>
-    <tr>
-        <td>Bonus?</td>
-        <td><%= @track.bonus ? "Yes" : "No" %></td>
-    </tr>
-</table>
+    <section class=album-nav>
+    <form action="<%=album_url(@track.album_id)%>" method="get">
+            <%= auth_token %>
+            <input type="submit" value="Back to Album">
+        </form>
+        <form action="<%=edit_track_url(@track.id)%>" method="get">
+            <%= auth_token %>
+            <input type="submit" value="Edit">
+        </form>
+        <form action="<%=track_url(@track.id)%>" method="post">
+            <input type="hidden" name="_method" value="delete">
+            <%= auth_token %>
+            <input type="submit" value="Delete">
+        </form>
+    </section>
 
-<section class=album-nav>
-<form action="<%=album_url(@track.album_id)%>" method="get">
-        <%= auth_token %>
-        <input type="submit" value="Back to Album">
-    </form>
-    <form action="<%=edit_track_url(@track.id)%>" method="get">
-        <%= auth_token %>
-        <input type="submit" value="Edit">
-    </form>
-    <form action="<%=track_url(@track.id)%>" method="post">
-        <input type="hidden" name="_method" value="delete">
-        <%= auth_token %>
-        <input type="submit" value="Delete">
-    </form>
-</section>
+    <br>
+        <div class="lyrics">
+            <p>Lyrics:</p>
+            <%= @track.lyrics.html_safe %>
+        </div>
 
-<br>
-<section class="extra-track-info">
-    <div class="lyrics">
-        <p>Lyrics:</p>
-        <%= @track.lyrics.html_safe %>
-    </div>
+    </section>
 
-    <div class="notes">
-        <% notes = @track.notes %>
-        <%= render "notes/note", notes: notes  if notes %>
-    </div>
-</section>
-</section>
+<aside class="col65">
+<% if @track.youtube %>
+    <div id="video"><%= @track.youtube.html_safe %></div>
+<% end %>
 
-<section class="col65">
-
+    <section id="notes">
+        <h3>What users are saying:</h3>
+        <%= render "notes/note", track: @track %>       
+        <%= render "notes/form", note: Note.new, track_id: @track.id %>
+    </section>
+</aside>
 </section>
 <br>

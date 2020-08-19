@@ -44,7 +44,16 @@ class TracksController < ApplicationController
 
     private
     def track_params
-        params.require(:track).permit(:album_id, :title, :ord, :lyrics, :bonus)
+        save = false
+        song_url = ""
+        if params[:track][:youtube]
+            params[:track][:youtube].each_char do |c|
+                song_url += c if save
+                save = true if c == '='
+            end
+        end
+        params[:track][:youtube] = "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/#{song_url}\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>".html_safe
+        params.require(:track).permit(:album_id, :title, :ord, :lyrics, :bonus, :youtube)
     end
 
 end

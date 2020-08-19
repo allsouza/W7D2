@@ -1,0 +1,12 @@
+<% action = note.body ? note_url(note.id) : notes_url %>
+<% method = note.body ? "patch" : "post" %>
+<% button = note.body ? "Save" : "Add Note" %>
+
+<form action="<%=action%>" method="post">
+    <input type="hidden" name="_method" value="<%=method%>">
+    <%= auth_token %>
+    <label for="body">What do you think?</label> <br>
+    <input type="hidden" name="note[track_id]" value="<%=track_id%>">
+    <textarea name="note[body]" id="body" cols="30" rows="5"><%= note.body %></textarea><br>
+    <input class="buttons" type="submit" value="<%=button%>">
+</form>

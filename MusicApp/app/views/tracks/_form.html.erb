@@ -3,31 +3,42 @@
 <% button = track.id ? "Save" : "Create" %>
 <% album_id = track.album_id.nil? ? params[:album_id].to_i : track.album_id %>
 
+
 <form action="<%=action%>" method="post">
     <%= auth_token %>
     <input type="hidden" name="_method" value="<%=method%>">
-
-    <label for="title">Title: </label>
-    <input type="text" name="track[title]" id="title" value="<%=track.title%>">
-
-    <label for="album">Album: </label>
-    <select name="track[album_id]" id="album">
-        <% Album.all.each do |album| %>
-            <option <%= album_id == album.id ? "selected" : "" %> value="<%=album.id%>"><%=album.title%></option>
-        <% end %>
-    </select>
-
-    <label for="ord">Track number: </label>
-    <input type="number" name="track[ord]" id="ord" value="<%=track.ord%>">
-
-    <label for="bonus?">Bonus? </label>
-    <label for="yes">Yes </label>
-    <input type="radio" name="track[bonus]" id="yes" value="true" <%= "checked" if track.bonus == true %>>
-    <label for="no">No </label>
-    <input type="radio" name="track[bonus]" id="no" value="false" <%= "checked" if track.bonus == false %>>
-
+    <table>
+    <tr>
+        <td><label for="title">Title: </label></td>
+        <td><input type="text" name="track[title]" id="title" value="<%=track.title%>"></td>
+    </tr>
+    <tr>
+        <td><label for="album">Album: </label>
+        <td><select name="track[album_id]" id="album">
+            <% Album.all.each do |album| %>
+                <option <%= album_id == album.id ? "selected" : "" %> value="<%=album.id%>"><%=album.title%></option>
+            <% end %>
+        </select></td>
+    </tr>
+    <tr>
+        <td><label for="ord">Track number: </label></td>
+        <td><input type="number" name="track[ord]" id="ord" value="<%=track.ord%>"></td>
+    </tr>
+    <tr>
+        <td><label for="youtube">Youtube Link: </label></td>
+        <td><input type="url" name="track[youtube]" id="youtube"></td>
+    </tr>
+    <tr>
+        <td><label for="bonus?">Bonus? </label></td>
+        <td><label for="yes">Yes </label>
+        <input type="radio" name="track[bonus]" id="yes" value="true" <%= "checked" if track.bonus == true %>>
+        <label for="no">No </label>
+        <input type="radio" name="track[bonus]" id="no" value="false" <%= "checked" if track.bonus == false %>></td>
+    </tr>
+    </table>
+    <br>
     <label for="lyrics">Lyrics:</label><br>
-    <textarea name="track[lyrics]" id="lyrics" cols="30" rows="10"><%= track.lyrics %></textarea>
-
+    <textarea name="track[lyrics]" id="lyrics" cols="40" rows="10"><%= track.lyrics %></textarea>
+    <br>
     <input type="submit" value="<%=button%>">
 </form>
